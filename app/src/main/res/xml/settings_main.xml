@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:key="@string/news_topic"
+        android:inputType="text"
+        android:selectAllOnFocus="true"
+        android:title="@string/news_topic_title"
+        />
+
+    <EditTextPreference
+        android:key="@string/news_person"
+        android:inputType="text"
+        android:selectAllOnFocus="true"
+        android:title="@string/news_topic_title"
+        />
+
+    <EditTextPreference
+        android:key="@string/news_location"
+        android:inputType="text"
+        android:selectAllOnFocus="true"
+        android:title="@string/news_location_title"
+        />
+
+</PreferenceScreen>
