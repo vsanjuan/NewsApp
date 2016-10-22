@@ -1,6 +1,10 @@
 package com.example.android.newsapp;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -12,7 +16,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
-/*    public static class NewsPreferenceFragment extends PreferenceFragment implements
+    public static class NewsPreferenceFragment extends PreferenceFragment implements
             Preference.OnPreferenceChangeListener {
 
         @Override
@@ -20,10 +24,32 @@ public class SettingsActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_main);
 
-            Preference Topic = findPreference(getString(R.string.news_location));
+            Preference topic = findPreference(getString(R.string.news_location));
+            bindPreferenceSummaryToValue(topic);
 
+            Preference person = findPreference(getString(R.string.news_topic));
+            bindPreferenceSummaryToValue(person);
+
+            Preference location = findPreference(getString(R.string.news_location));
+            bindPreferenceSummaryToValue(location);
 
         }
 
-    }*/
+        @Override
+        public boolean onPreferenceChange(Preference preference, Object value) {
+
+            String stringValue = value.toString();
+            preference.setSummary(stringValue);
+            return true;
+        }
+
+        // Sets a listener for the preference
+        private void bindPreferenceSummaryToValue(Preference preference) {
+            preference.setOnPreferenceChangeListener(this);
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
+            String preferenceString = preferences.getString(preference.getKey(), "");
+            onPreferenceChange(preference, preferenceString);
+        }
+
+    }
 }

@@ -10,4 +10,5 @@
     <string name="news_location">news_location</string>
     <string name="news_location_title">Location</string>
     <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">Settings</string>
 </resources>
