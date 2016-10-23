@@ -7,6 +7,7 @@ import android.content.Loader;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -26,8 +27,13 @@ public class NewsActivity extends AppCompatActivity
         SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String GUARDIAN_API_URL =
+//            "http://content.guardianapis.com/search?q=";
             "http://content.guardianapis.com/search?q=debates&show-tags=contributor" +
                     "&api-key=2ff892df-c635-4cb4-89a8-e64aa6046043";
+
+    private static final String GUARDIAN_API_KEY =
+            "2ff892df-c635-4cb4-89a8-e64aa6046043";
+
 
     private static final String LOG_TAG = NewsActivity.class.getName();
 
@@ -103,6 +109,26 @@ public class NewsActivity extends AppCompatActivity
 
     @Override
     public Loader<List<News>> onCreateLoader (int i, Bundle bundle) {
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String topic = sharedPrefs.getString(
+                getString(R.string.news_topic), getString(R.string.news_topic_default));
+        String person = sharedPrefs.getString(
+                getString(R.string.news_person), "");
+        String location = sharedPrefs.getString(
+                getString(R.string.news_location),"");
+
+        Uri baseUri = Uri.parse(GUARDIAN_API_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        uriBuilder.appendQueryParameter("show-tags","contributor");
+
+
+
+
+
+
 
         return new NewsLoader(this, GUARDIAN_API_URL);
 

@@ -13,13 +13,15 @@ public class News {
     private ArrayList<String> mAuthor;
     private URL mNews;
     private String mSection;
+    private String mPublicationDate;
 
-    public News (String title, ArrayList<String> author, String section, URL news) {
+    public News (String title, ArrayList<String> author, String section, String publication, URL news) {
 
         mAuthor = author;
         mNews = news;
         mTitle = title;
         mSection = section;
+        mPublicationDate = publication;
 
 
     }
@@ -40,5 +42,10 @@ public class News {
 
     public String getmSection() {
         return mSection;
+    }
+
+
+    public String getmPublicationDate() {
+        return mPublicationDate;
     }
 }

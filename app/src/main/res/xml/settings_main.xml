@@ -4,6 +4,7 @@
     <EditTextPreference
         android:key="@string/news_topic"
         android:inputType="text"
+        android:defaultValue="@string/news_topic_default"
         android:selectAllOnFocus="true"
         android:title="@string/news_topic_title"
         />

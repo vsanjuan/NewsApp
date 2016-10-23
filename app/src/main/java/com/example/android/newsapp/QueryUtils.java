@@ -61,6 +61,10 @@ public final class QueryUtils {
 
                 URL newsURL = createUrl(newsitem.getString("webUrl"));
                 String newsTitle = newsitem.getString("webTitle");
+                String webPublicationDate = newsitem.getString("webPublicationDate");
+
+                String newsDate = getDate(webPublicationDate,"MMM d, yyyy");
+
                 String newsSection = newsitem.getString("sectionName");
                 JSONArray tags = newsitem.getJSONArray(("tags"));
 
@@ -78,7 +82,7 @@ public final class QueryUtils {
 
                 }
 
-                news.add(new News(newsTitle,authors,newsSection,newsURL));
+                news.add(new News(newsTitle,authors,newsSection, newsDate, newsURL));
 
 
             }
@@ -94,14 +98,18 @@ public final class QueryUtils {
         return news;
     }
 
-    public static String getDate( long milliSeconds, String dateFormat) {
+    public static String getDate( String webPublicationDate, String dateFormat) {
 
         // Create a DateFormatter object for displaying date in specified format
         SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
 
+        int year = Integer.parseInt(webPublicationDate.substring(0,4));
+        int month = Integer.parseInt(webPublicationDate.substring(5,7));
+        int day = Integer.parseInt(webPublicationDate.substring(8,10));
+
         // Create a calendar object that will convert the date in milliseconds to date.
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(milliSeconds);
+        calendar.set(year,month,day);
         return formatter.format(calendar.getTime());
 
     }

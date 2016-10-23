@@ -26,4 +26,10 @@
         android:layout_height="wrap_content"
         android:textSize="15sp"/>
 
+    <TextView
+        android:id="@+id/news_date"
+        android:layout_width="60dp"
+        android:textSize="15sp"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

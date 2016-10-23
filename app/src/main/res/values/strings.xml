@@ -5,6 +5,7 @@
     <string name="no_news">No news found</string>
     <string name="news_topic">news_topic</string>
     <string name="news_topic_title">Topic</string>
+    <string name="news_topic_default">Sharks</string>
     <string name="news_person">news_person</string>
     <string name="news_person_title">Person</string>
     <string name="news_location">news_location</string>
