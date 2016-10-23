@@ -49,7 +49,4 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
 
     }
 
-
-
-
 }
