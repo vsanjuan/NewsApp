@@ -49,7 +49,10 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
         TextView authorView = (TextView) listItemView.findViewById(R.id.author);
         // TODO: Format the view and populate it with an author's Array
-        authorView.setText(currentNews.getmAuthor().get(0));
+        if ( currentNews.getmAuthor().size() > 0) {
+        authorView.setText(currentNews.getmAuthor().get(0));} else {
+            authorView.setVisibility(View.INVISIBLE);
+        }
 
         TextView titleView = (TextView) listItemView.findViewById(R.id.title);
         titleView.setText(currentNews.getmTitle());

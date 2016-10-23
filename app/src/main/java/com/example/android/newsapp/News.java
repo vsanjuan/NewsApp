@@ -1,6 +1,7 @@
 package com.example.android.newsapp;
 
-import java.net.URL;
+import android.net.Uri;
+
 import java.util.ArrayList;
 
 /**
@@ -11,11 +12,11 @@ public class News {
 
     private String mTitle;
     private ArrayList<String> mAuthor;
-    private URL mNews;
+    private Uri mNews;
     private String mSection;
     private String mPublicationDate;
 
-    public News (String title, ArrayList<String> author, String section, String publication, URL news) {
+    public News (String title, ArrayList<String> author, String section, String publication, Uri news) {
 
         mAuthor = author;
         mNews = news;
@@ -36,7 +37,7 @@ public class News {
         return mAuthor;
     }
 
-    public URL getmNews() {
+    public Uri getmNews() {
         return mNews;
     }
 

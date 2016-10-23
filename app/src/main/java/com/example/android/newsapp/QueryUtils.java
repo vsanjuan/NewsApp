@@ -1,5 +1,6 @@
 package com.example.android.newsapp;
 
+import android.net.Uri;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -59,7 +60,7 @@ public final class QueryUtils {
 
                 JSONObject newsitem = results.getJSONObject(i);
 
-                URL newsURL = createUrl(newsitem.getString("webUrl"));
+                Uri newsUri = Uri.parse(newsitem.getString("webUrl"));
                 String newsTitle = newsitem.getString("webTitle");
                 String webPublicationDate = newsitem.getString("webPublicationDate");
 
@@ -82,7 +83,7 @@ public final class QueryUtils {
 
                 }
 
-                news.add(new News(newsTitle,authors,newsSection, newsDate, newsURL));
+                news.add(new News(newsTitle,authors,newsSection, newsDate, newsUri));
 
 
             }

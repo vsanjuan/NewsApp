@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,13 +28,10 @@ public class NewsActivity extends AppCompatActivity
         SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String GUARDIAN_API_URL =
-//            "http://content.guardianapis.com/search?q=";
-            "http://content.guardianapis.com/search?q=debates&show-tags=contributor" +
-                    "&api-key=2ff892df-c635-4cb4-89a8-e64aa6046043";
+            "http://content.guardianapis.com/search?q=";
 
     private static final String GUARDIAN_API_KEY =
             "2ff892df-c635-4cb4-89a8-e64aa6046043";
-
 
     private static final String LOG_TAG = NewsActivity.class.getName();
 
@@ -48,7 +46,6 @@ public class NewsActivity extends AppCompatActivity
 
     /** Adapter for the list of earthquakes */
     private NewsAdapter mAdapter;
-
 
 
     @Override
@@ -76,6 +73,25 @@ public class NewsActivity extends AppCompatActivity
         // So we know when the user has adjusted the query settings
         prefs.registerOnSharedPreferenceChangeListener(this);
 
+        // Set an item click listener on the ListView, which sends an intent to a web browser
+        // to open a website with more information about the selected earthquake.
+        newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                // Find the current earthquake that was clicked on
+                News currentNews = mAdapter.getItem(position);
+
+                // Convert the String URL into a URI object (to pass into the Intent constructor)
+                Uri earthquakeUrl = currentNews.getmNews();
+
+                // Create a new intent to view the earthquake URL
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, earthquakeUrl);
+
+                // Send the intent to launch a new activity
+                startActivity(websiteIntent);
+            }
+        });
+
 
         // Get a reference to the ConnectivityManager to check state of network connectivity
         ConnectivityManager connMgr = (ConnectivityManager)
@@ -97,9 +113,8 @@ public class NewsActivity extends AppCompatActivity
         } else {
             // Otherwise, display error
             // First, hide loading indicator so error message will be visible
-            /*View loadingIndicator = findViewById(R.id.loading_indicator);
+            View loadingIndicator = findViewById(R.id.progress_bar);
             loadingIndicator.setVisibility(View.GONE);
-*/
             // Update empty state with no connection error message
             mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
@@ -114,23 +129,22 @@ public class NewsActivity extends AppCompatActivity
 
         String topic = sharedPrefs.getString(
                 getString(R.string.news_topic), getString(R.string.news_topic_default));
-        String person = sharedPrefs.getString(
-                getString(R.string.news_person), "");
-        String location = sharedPrefs.getString(
-                getString(R.string.news_location),"");
 
-        Uri baseUri = Uri.parse(GUARDIAN_API_URL);
+        String searchString = topic;
+
+        String baseString = GUARDIAN_API_URL + topic;
+
+        Uri baseUri = Uri.parse(baseString);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
         uriBuilder.appendQueryParameter("show-tags","contributor");
+        uriBuilder.appendQueryParameter("show-fields","webPublicationDate");
+        uriBuilder.appendQueryParameter("api-key",GUARDIAN_API_KEY);
+
+        Log.v(LOG_TAG,uriBuilder.toString());
 
 
-
-
-
-
-
-        return new NewsLoader(this, GUARDIAN_API_URL);
+        return new NewsLoader(this, uriBuilder.toString());
 
     }
 
