@@ -24,14 +24,8 @@ public class SettingsActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_main);
 
-            Preference topic = findPreference(getString(R.string.news_location));
-            bindPreferenceSummaryToValue(topic);
-
             Preference person = findPreference(getString(R.string.news_topic));
             bindPreferenceSummaryToValue(person);
-
-            Preference location = findPreference(getString(R.string.news_location));
-            bindPreferenceSummaryToValue(location);
 
         }
 

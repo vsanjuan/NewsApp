@@ -24,7 +24,6 @@ public class News {
         mSection = section;
         mPublicationDate = publication;
 
-
     }
 
     public String getmTitle() {

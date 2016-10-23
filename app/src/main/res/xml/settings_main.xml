@@ -9,18 +9,5 @@
         android:title="@string/news_topic_title"
         />
 
-    <EditTextPreference
-        android:key="@string/news_person"
-        android:inputType="text"
-        android:selectAllOnFocus="true"
-        android:title="@string/news_person_title"
-        />
-
-    <EditTextPreference
-        android:key="@string/news_location"
-        android:inputType="text"
-        android:selectAllOnFocus="true"
-        android:title="@string/news_location_title"
-        />
 
 </PreferenceScreen>
